@@ -1,0 +1,35 @@
+﻿<Window x:Class="MijnenRapportage.Config.ReportValuesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MijnenRapportage.Config"
+        mc:Ignorable="d"
+        Title="ReportValuesWindow" Height="357" Width="260">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="label" Content="IJzerwaarde" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Steenwaarde" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2" Content="Kleiwaarde" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label3" Content="Loon 1 uur" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1mob" Content="1 uur mobiel" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label4" Content="Loon 2 uur" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2mob" Content="2 uur mobiel" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label5" Content="Loon 6 uur" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label6" Content="Loon 10 uur" HorizontalAlignment="Left" Margin="10,229,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label7" Content="Loon 22 uur" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ijzerWaarde" HorizontalAlignment="Left" Height="23" Margin="110,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="steenWaarde" HorizontalAlignment="Left" Height="23" Margin="110,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="kleiWaarde" HorizontalAlignment="Left" Height="23" Margin="110,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="loon1uur" HorizontalAlignment="Left" Height="23" Margin="110,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="loon1uurmob" HorizontalAlignment="Left" Height="23" Margin="110,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="loon2uur" HorizontalAlignment="Left" Height="23" Margin="110,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="loon2uurmob" HorizontalAlignment="Left" Height="23" Margin="110,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="loon6uur" HorizontalAlignment="Left" Height="23" Margin="110,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="loon10uur" HorizontalAlignment="Left" Height="23" Margin="110,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="loon22uur" HorizontalAlignment="Left" Height="23" Margin="110,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="opslaan" Content="Opslaan" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top" Width="220" Height="25" Click="opslaan_Click"/>
+    </Grid>
+</Window>
