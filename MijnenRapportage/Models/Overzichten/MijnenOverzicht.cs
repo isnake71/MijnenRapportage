@@ -10,14 +10,12 @@ using MijnenRapportage.Models.Mijnen;
 namespace MijnenRapportage.Models.Overzichten {
   [Serializable]
   public class MijnenOverzicht {
-    private GoudMijn mijn1 = new GoudMijn();
-    private IjzerMijn mijn2 = new IjzerMijn();
-    private GoudMijn mijn3 = new GoudMijn();
-    private SteenMijn mijn4 = new SteenMijn();
-    private SteenMijn mijn5 = new SteenMijn();
-    private KleiMijn mijn6 = new KleiMijn();
+    public GoudMijn mijn1 = new GoudMijn();
+    public IjzerMijn mijn2 = new IjzerMijn();
+    public KleiMijn mijn3 = new KleiMijn();
+    public SteenMijn mijn4 = new SteenMijn();
 
-    private CultureInfo provider = CultureInfo.CreateSpecificCulture("nl-NL");
+    private DateTimeFormatInfo provider = DateTimeFormatInfo.InvariantInfo;
     private string datumFormat = "yyyy-MM-dd";
 
     public Decimal ijzerWaarde;
@@ -36,8 +34,6 @@ namespace MijnenRapportage.Models.Overzichten {
       mijn2.reInitMijn();
       mijn3.reInitMijn();
       mijn4.reInitMijn();
-      mijn5.reInitMijn();
-      mijn6.reInitMijn();
     }
 
     public void inlezen(string invoer) {
@@ -49,10 +45,8 @@ namespace MijnenRapportage.Models.Overzichten {
     private void ParseInvoer(string invoer) {
       GoudMijn lmijn1 = new GoudMijn();
       IjzerMijn lmijn2 = new IjzerMijn();
-      GoudMijn lmijn3 = new GoudMijn();
+      KleiMijn lmijn3 = new KleiMijn();
       SteenMijn lmijn4 = new SteenMijn();
-      SteenMijn lmijn5 = new SteenMijn();
-      KleiMijn lmijn6 = new KleiMijn();
       DateTime skipDag = DateTime.Today;
       DateTime parseSkipDag = DateTime.Today;
 
@@ -60,29 +54,19 @@ namespace MijnenRapportage.Models.Overzichten {
       lmijn2.OpbrengstenLijst = mijn2.OpbrengstenLijst;
       lmijn3.OpbrengstenLijst = mijn3.OpbrengstenLijst;
       lmijn4.OpbrengstenLijst = mijn4.OpbrengstenLijst;
-      lmijn5.OpbrengstenLijst = mijn5.OpbrengstenLijst;
-      lmijn6.OpbrengstenLijst = mijn6.OpbrengstenLijst;
-      parseSkipDag = ParseMijn(lmijn1, invoer, "Mijn 1", "Mijn 2");
+      parseSkipDag = ParseMijn(lmijn1, invoer, "Mine 1", "Mine 2");
       if (parseSkipDag < skipDag) {
         skipDag = parseSkipDag;
       }
-      parseSkipDag = ParseMijn(lmijn2, invoer, "Mijn 2", "Mijn 3");
+      parseSkipDag = ParseMijn(lmijn2, invoer, "Mine 2", "Mine 3");
       if (parseSkipDag < skipDag) {
         skipDag = parseSkipDag;
       }
-      parseSkipDag = ParseMijn(lmijn3, invoer, "Mijn 3", "Mijn 4");
+      parseSkipDag = ParseMijn(lmijn3, invoer, "Mine 3", "Mine 4");
       if (parseSkipDag < skipDag) {
         skipDag = parseSkipDag;
       }
-      parseSkipDag = ParseMijn(lmijn4, invoer, "Mijn 4", "Mijn 5");
-      if (parseSkipDag < skipDag) {
-        skipDag = parseSkipDag;
-      }
-      parseSkipDag = ParseMijn(lmijn5, invoer, "Mijn 5", "Mijn 6");
-      if (parseSkipDag < skipDag) {
-        skipDag = parseSkipDag;
-      }
-      parseSkipDag = ParseMijn(lmijn6, invoer, "Mijn 6", null);
+      parseSkipDag = ParseMijn(lmijn4, invoer, "Mine 4", null);
       if (parseSkipDag < skipDag) {
         skipDag = parseSkipDag;
       }
@@ -90,14 +74,10 @@ namespace MijnenRapportage.Models.Overzichten {
       mijn2.addMijnKosten(lmijn2, skipDag);
       mijn3.addMijnKosten(lmijn3, skipDag);
       mijn4.addMijnKosten(lmijn4, skipDag);
-      mijn5.addMijnKosten(lmijn5, skipDag);
-      mijn6.addMijnKosten(lmijn6, skipDag);
       mijn1.OpbrengstenLijst = lmijn1.OpbrengstenLijst;
       mijn2.OpbrengstenLijst = lmijn2.OpbrengstenLijst;
       mijn3.OpbrengstenLijst = lmijn3.OpbrengstenLijst;
       mijn4.OpbrengstenLijst = lmijn4.OpbrengstenLijst;
-      mijn5.OpbrengstenLijst = lmijn5.OpbrengstenLijst;
-      mijn6.OpbrengstenLijst = lmijn6.OpbrengstenLijst;
     }
 
     private DateTime ParseMijn(Mijn mijnMijn, string invoer, string startString, string endString) {
@@ -119,16 +99,16 @@ namespace MijnenRapportage.Models.Overzichten {
           if (endPoint > index) {
             int mijnGegevensLength = endPoint - index;
             String mijnGegevens = mijnInvoer.Substring(index, mijnGegevensLength);
-            index = mijnGegevens.IndexOf("Aantal mijnwerkers", 0);
+            index = mijnGegevens.IndexOf("Number of miners", 0);
             if (index > 0) {
-              endPoint = mijnGegevens.IndexOf("Productie", index);
+              endPoint = mijnGegevens.IndexOf("Output", index);
               if (endPoint > index) {
                 mijnGegevensLength = endPoint - index;
                 String mijnWerkGegevens = mijnGegevens.Substring(index, mijnGegevensLength);
                 skipDag = ParseWerkUren(mijnMijn, mijnWerkGegevens);
 
                 index = endPoint;
-                endPoint = mijnGegevens.IndexOf("Grondstoffen", index);
+                endPoint = mijnGegevens.IndexOf("Resources", index);
                 if (endPoint > index) {
                   mijnGegevensLength = endPoint - index;
                   String mijnProductieGegevens = mijnGegevens.Substring(index, mijnGegevensLength);
@@ -219,7 +199,7 @@ namespace MijnenRapportage.Models.Overzichten {
                   DateTime werkDag = DateTime.ParseExact(workitems[0], datumFormat, provider);
                   if (werkMijn.mijnType == "goud") {
                     workitems[1].Replace(',', '.');
-                    Decimal opbrengst = Decimal.Parse(workitems[1]);
+                    Decimal opbrengst = Decimal.Parse(workitems[1], CultureInfo.InvariantCulture);
                     (werkMijn as GoudMijn).Opbrengsten(werkDag, opbrengst);
                   }
                   else {
@@ -289,8 +269,16 @@ namespace MijnenRapportage.Models.Overzichten {
       int werk10uren = Werk10uren(dag);
       int werk22uren = Werk22uren(dag);
 
-      Decimal loonkosten = (werk1uren * loon1uur) + (werk1urenMob * loon1uurmob) + (werk2uren * loon2uur) + (werk2urenMob * loon2uurmob)
-                         + (werk6uren * loon6uur) + (werk10uren * loon10uur) + (werk22uren * loon22uur);
+      Decimal loon1uren = Loon1uren(dag);
+      Decimal loon1urenMob = Loon1urenMob(dag);
+      Decimal loon2uren = Loon2uren(dag);
+      Decimal loon2urenMob = Loon2urenMob(dag);
+      Decimal loon6uren = Loon6uren(dag);
+      Decimal loon10uren = Loon10uren(dag);
+      Decimal loon22uren = Loon22uren(dag);
+
+      Decimal loonkosten = loon1uren + loon1urenMob + loon2uren + loon2urenMob
+                         + loon6uren + loon10uren + loon22uren;
 
       int steentotaal = steenopbrengst - steenkosten;
       int ijzertotaal = ijzeropbrengst - ijzerkosten;
@@ -301,58 +289,58 @@ namespace MijnenRapportage.Models.Overzichten {
                                   goudtotaal;
 
       String dagRapport = "[quote=\"";
-      dagRapport += dag.ToString("m", provider);
+      dagRapport += dag.ToString("m", DateTimeFormatInfo.InvariantInfo);
       dagRapport += "\"]";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[b]Opbrengsten[/b]";
+      dagRapport += "[b]Yields[/b]";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[list] [*]Steen: ";
+      dagRapport += "[list] [*]Stone: ";
       dagRapport += steenopbrengst;
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]IJzer: ";
+      dagRapport += "[*]Iron: ";
       dagRapport += ijzeropbrengst;
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]Goud: fl. ";
+      dagRapport += "[*]Gold: £ ";
       dagRapport += goudopbrengst.ToString("#.00").Replace(".", ",");
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]Klei: ";
+      dagRapport += "[*]Clay: ";
       dagRapport += kleiopbrengst;
       dagRapport += Environment.NewLine;
 
       dagRapport += "[/list]";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[b]Kosten[/b]";
+      dagRapport += "[b]Costs[/b]";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[list] [*]Steen: ";
+      dagRapport += "[list] [*]Stone: ";
       dagRapport += steenkosten;
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]IJzer: ";
+      dagRapport += "[*]Iron: ";
       dagRapport += ijzerkosten;
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]Loonkost: fl ";
+      dagRapport += "[*]Wages: £ ";
       dagRapport += loonkosten.ToString("#.00").Replace(".", ",");
       dagRapport += Environment.NewLine;
 
       dagRapport += "[/list]";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[b]Netto opbrengst = ";
+      dagRapport += "[b]Net gain = ";
       if (opbrengstenWaarde > 0) {
         dagRapport += "[color=green]";
       }
       if (opbrengstenWaarde < 0) {
         dagRapport += "[color=red]";
       }
-      dagRapport += " fl ";
+      dagRapport += " £ ";
       dagRapport += opbrengstenWaarde.ToString("#.00").Replace(".", ",");
       if (opbrengstenWaarde != 0) {
         dagRapport += "[/color]";
@@ -360,7 +348,7 @@ namespace MijnenRapportage.Models.Overzichten {
       dagRapport += "[/b]";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[list] [*]Steen: ";
+      dagRapport += "[list] [*]Stone: ";
       if (steentotaal > 0) {
         dagRapport += "[color=green]";
       }
@@ -373,7 +361,7 @@ namespace MijnenRapportage.Models.Overzichten {
       }
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]IJzer: ";
+      dagRapport += "[*]Iron: ";
       if (ijzertotaal > 0) {
         dagRapport += "[color=green]";
       }
@@ -386,21 +374,21 @@ namespace MijnenRapportage.Models.Overzichten {
       }
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]Geld: ";
+      dagRapport += "[*]Gold: ";
       if (goudtotaal > 0) {
         dagRapport += "[color=green]";
       }
       if (goudtotaal < 0) {
         dagRapport += "[color=red]";
       }
-      dagRapport += " fl ";
+      dagRapport += " £ ";
       dagRapport += goudtotaal.ToString("#.00").Replace(".", ",");
       if (goudtotaal != 0) {
         dagRapport += "[/color]";
       }
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]Klei: ";
+      dagRapport += "[*]Clay: ";
       if (kleitotaal > 0) {
         dagRapport += "[color=green]";
       }
@@ -414,38 +402,38 @@ namespace MijnenRapportage.Models.Overzichten {
       dagRapport += "[/list]";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[b]Gewerkte uren[/b]";
+      dagRapport += "[b]Worked hours[/b]";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[list] [*]1 uur: ";
+      dagRapport += "[list] [*]1 hour: ";
       dagRapport += werk1uren;
       dagRapport += " website";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]1 uur: ";
+      dagRapport += "[*]1 hour: ";
       dagRapport += werk1urenMob;
-      dagRapport += " mobiel";
+      dagRapport += " mobile";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]2 uur: ";
+      dagRapport += "[*]2 hour: ";
       dagRapport += werk2uren;
       dagRapport += " website";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]2 uur: ";
+      dagRapport += "[*]2 hour: ";
       dagRapport += werk2urenMob;
-      dagRapport += " mobiel";
+      dagRapport += " mobile";
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]6 uur: ";
+      dagRapport += "[*]6 hour: ";
       dagRapport += werk6uren;
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]10 uur: ";
+      dagRapport += "[*]10 hour: ";
       dagRapport += werk10uren;
       dagRapport += Environment.NewLine;
 
-      dagRapport += "[*]22 uur: ";
+      dagRapport += "[*]22 hour: ";
       dagRapport += werk22uren;
       dagRapport += Environment.NewLine;
 
@@ -515,6 +503,21 @@ namespace MijnenRapportage.Models.Overzichten {
                           Werk22uren(dag.AddDays(-4)) + Werk22uren(dag.AddDays(-5)) + Werk22uren(dag.AddDays(-6)) +
                           Werk22uren(dag.AddDays(-7));
 
+      Decimal loon1uren = Loon1uren(dag) + Loon1uren(dag.AddDays(1)) + Loon1uren(dag.AddDays(2)) + Loon1uren(dag.AddDays(3)) +
+                          Loon1uren(dag.AddDays(4)) + Loon1uren(dag.AddDays(5)) + Loon1uren(dag.AddDays(6));
+      Decimal loon1urenmob = Loon1urenMob(dag) + Loon1urenMob(dag.AddDays(1)) + Loon1urenMob(dag.AddDays(2)) + Loon1urenMob(dag.AddDays(3)) +
+                             Loon1urenMob(dag.AddDays(4)) + Loon1urenMob(dag.AddDays(5)) + Loon1urenMob(dag.AddDays(6));
+      Decimal loon2uren = Loon2uren(dag) + Loon2uren(dag.AddDays(1)) + Loon2uren(dag.AddDays(2)) + Loon2uren(dag.AddDays(3)) +
+                          Loon2uren(dag.AddDays(4)) + Loon2uren(dag.AddDays(5)) + Loon2uren(dag.AddDays(6));
+      Decimal loon2urenmob = Loon2urenMob(dag) + Loon2urenMob(dag.AddDays(1)) + Loon2urenMob(dag.AddDays(2)) + Loon2urenMob(dag.AddDays(3)) +
+                             Loon2urenMob(dag.AddDays(4)) + Loon2urenMob(dag.AddDays(5)) + Loon2urenMob(dag.AddDays(6));
+      Decimal loon6uren = Loon6uren(dag) + Loon6uren(dag.AddDays(1)) + Loon6uren(dag.AddDays(2)) + Loon6uren(dag.AddDays(3)) +
+                          Loon6uren(dag.AddDays(4)) + Loon6uren(dag.AddDays(5)) + Loon6uren(dag.AddDays(6));
+      Decimal loon10uren = Loon10uren(dag) + Loon10uren(dag.AddDays(1)) + Loon10uren(dag.AddDays(2)) + Loon10uren(dag.AddDays(3)) + 
+                           Loon10uren(dag.AddDays(4)) + Loon10uren(dag.AddDays(5)) + Loon10uren(dag.AddDays(6));
+      Decimal loon22uren = Loon22uren(dag) + Loon22uren(dag.AddDays(1)) + Loon22uren(dag.AddDays(2)) + Loon22uren(dag.AddDays(3)) + 
+                           Loon22uren(dag.AddDays(4)) + Loon22uren(dag.AddDays(5)) + Loon22uren(dag.AddDays(6));
+
       int uren1dif = werk1uren - oudwerk1uren;
       int uren1difmob = werk1urenmob - oudwerk1urenmob;
       int uren2dif = werk2uren - oudwerk2uren;
@@ -523,8 +526,8 @@ namespace MijnenRapportage.Models.Overzichten {
       int uren10dif = werk10uren - oudwerk10uren;
       int uren22dif = werk22uren - oudwerk22uren;
 
-      Decimal loonkosten = (werk1uren * loon1uur) + (werk1urenmob * loon1uurmob) + (werk2uren * loon2uur) + (werk2urenmob * loon2uurmob)
-                         + (werk6uren * loon6uur) + (werk10uren * loon10uur) + (werk22uren * loon22uur);
+      Decimal loonkosten = loon1uren + loon1urenmob + loon2uren + loon2urenmob
+                         + loon6uren + loon10uren + loon22uren;
 
       int steentotaal = steenopbrengst - steenkosten;
       int ijzertotaal = ijzeropbrengst - ijzerkosten;
@@ -537,63 +540,63 @@ namespace MijnenRapportage.Models.Overzichten {
       String weekRapport = "[quote][rp]";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[b][u][size=18]Mijnopbrengst van ";
-      weekRapport += dag.ToString("m", provider);
-      weekRapport += " t/m ";
-      weekRapport += dag.AddDays(6).ToString("m", provider);
+      weekRapport += "[b][u][size=18]Mine yields from ";
+      weekRapport += dag.ToString("m", DateTimeFormatInfo.InvariantInfo);
+      weekRapport += " until ";
+      weekRapport += dag.AddDays(6).ToString("m", DateTimeFormatInfo.InvariantInfo);
       weekRapport += "[/size][/u][/b]";
       weekRapport += Environment.NewLine;
       weekRapport += Environment.NewLine;
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[b]Opbrengsten[/b]";
+      weekRapport += "[b]Yields[/b]";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[list] [*]Steen: ";
+      weekRapport += "[list] [*]Stone: ";
       weekRapport += steenopbrengst;
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]IJzer: ";
+      weekRapport += "[*]Iron: ";
       weekRapport += ijzeropbrengst;
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]Goud: fl. ";
+      weekRapport += "[*]Gold: £ ";
       weekRapport += goudopbrengst.ToString("#.00").Replace(".", ",");
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]Klei: ";
+      weekRapport += "[*]Clay: ";
       weekRapport += kleiopbrengst;
       weekRapport += Environment.NewLine;
 
       weekRapport += "[/list]";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[b]Kosten[/b]";
+      weekRapport += "[b]Costs[/b]";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[list] [*]Steen: ";
+      weekRapport += "[list] [*]Stone: ";
       weekRapport += steenkosten;
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]IJzer: ";
+      weekRapport += "[*]Iron: ";
       weekRapport += ijzerkosten;
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]Loonkost: fl ";
+      weekRapport += "[*]Wages: £ ";
       weekRapport += loonkosten.ToString("#.00").Replace(".", ",");
       weekRapport += Environment.NewLine;
 
       weekRapport += "[/list]";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[b]Netto opbrengst = ";
+      weekRapport += "[b]Net gain = ";
       if (opbrengstenWaarde > 0) {
         weekRapport += "[color=green]";
       }
       if (opbrengstenWaarde < 0) {
         weekRapport += "[color=red]";
       }
-      weekRapport += " fl ";
+      weekRapport += " £ ";
       weekRapport += opbrengstenWaarde.ToString("#.00").Replace(".", ",");
       if (opbrengstenWaarde != 0) {
         weekRapport += "[/color]";
@@ -601,7 +604,7 @@ namespace MijnenRapportage.Models.Overzichten {
       weekRapport += "[/b]";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[list] [*]Steen: ";
+      weekRapport += "[list] [*]Stone: ";
       if (steentotaal > 0) {
         weekRapport += "[color=green]";
       }
@@ -614,7 +617,7 @@ namespace MijnenRapportage.Models.Overzichten {
       }
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]IJzer: ";
+      weekRapport += "[*]Iron: ";
       if (ijzertotaal > 0) {
         weekRapport += "[color=green]";
       }
@@ -627,21 +630,21 @@ namespace MijnenRapportage.Models.Overzichten {
       }
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]Geld: ";
+      weekRapport += "[*]Gold: ";
       if (goudtotaal > 0) {
         weekRapport += "[color=green]";
       }
       if (goudtotaal < 0) {
         weekRapport += "[color=red]";
       }
-      weekRapport += " fl ";
+      weekRapport += " £ ";
       weekRapport += goudtotaal.ToString("#.00").Replace(".", ",");
       if (goudtotaal != 0) {
         weekRapport += "[/color]";
       }
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]Klei: ";
+      weekRapport += "[*]Clay: ";
       if (kleitotaal > 0) {
         weekRapport += "[color=green]";
       }
@@ -655,10 +658,10 @@ namespace MijnenRapportage.Models.Overzichten {
       weekRapport += "[/list]";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[b]Gewerkte uren[/b]";
+      weekRapport += "[b]Worked hours[/b]";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[list] [*]1 uur: ";
+      weekRapport += "[list] [*]1 hour: ";
       weekRapport += werk1uren;
       weekRapport += " (";
       if (uren1dif > 0) {
@@ -674,7 +677,7 @@ namespace MijnenRapportage.Models.Overzichten {
       weekRapport += ") website";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]1 uur: ";
+      weekRapport += "[*]1 hour: ";
       weekRapport += werk1urenmob;
       weekRapport += " (";
       if (uren1difmob > 0) {
@@ -690,7 +693,7 @@ namespace MijnenRapportage.Models.Overzichten {
       weekRapport += ") mobiel";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]2 uur: ";
+      weekRapport += "[*]2 hour: ";
       weekRapport += werk2uren;
       weekRapport += " (";
       if (uren2dif > 0) {
@@ -706,7 +709,7 @@ namespace MijnenRapportage.Models.Overzichten {
       weekRapport += ") website";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]2 uur: ";
+      weekRapport += "[*]2 hour: ";
       weekRapport += werk2urenmob;
       weekRapport += " (";
       if (uren2difmob > 0) {
@@ -722,7 +725,7 @@ namespace MijnenRapportage.Models.Overzichten {
       weekRapport += ") mobiel";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]6 uur: ";
+      weekRapport += "[*]6 hour: ";
       weekRapport += werk6uren;
       weekRapport += " (";
       if (uren6dif > 0) {
@@ -738,7 +741,7 @@ namespace MijnenRapportage.Models.Overzichten {
       weekRapport += ")";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]10 uur: ";
+      weekRapport += "[*]10 hour: ";
       weekRapport += werk10uren;
       weekRapport += " (";
       if (uren10dif > 0) {
@@ -754,7 +757,7 @@ namespace MijnenRapportage.Models.Overzichten {
       weekRapport += ")";
       weekRapport += Environment.NewLine;
 
-      weekRapport += "[*]22 uur: ";
+      weekRapport += "[*]22 hour: ";
       weekRapport += werk22uren;
       weekRapport += " (";
       if (uren22dif > 0) {
@@ -780,11 +783,11 @@ namespace MijnenRapportage.Models.Overzichten {
       String otherRapport = "[quote][rp]";
       DateTime calcDag = requestInfo.BeginDag;
       if (requestInfo.BeginDag > requestInfo.EindDag) {
-        return "Einddatum mag niet voor de begindatum liggen.";
+        return "Enddate cannot be before teh startdate.";
       }
       if (!requestInfo.IncludeMijn[0] && !requestInfo.IncludeMijn[1] && !requestInfo.IncludeMijn[2] &&
-          !requestInfo.IncludeMijn[3] && !requestInfo.IncludeMijn[4] && !requestInfo.IncludeMijn[5]) {
-        return "Geen mijnen geselecteerd, kan geen rapport maken.";
+          !requestInfo.IncludeMijn[3]) {
+        return "No mines selected, cannot make a report.";
       }
 
       int steenopbrengst = 0;
@@ -801,9 +804,16 @@ namespace MijnenRapportage.Models.Overzichten {
       int werk6uren = 0;
       int werk10uren = 0;
       int werk22uren = 0;
+      Decimal loon1uren = 0;
+      Decimal loon1urenmob = 0;
+      Decimal loon2uren = 0;
+      Decimal loon2urenmob = 0;
+      Decimal loon6uren = 0;
+      Decimal loon10uren = 0;
+      Decimal loon22uren = 0;
 
       while (calcDag <= requestInfo.EindDag) {
-        for (int mijnNummer = 0; mijnNummer < 6; mijnNummer++) {
+        for (int mijnNummer = 0; mijnNummer < 4; mijnNummer++) {
           if (requestInfo.IncludeMijn[mijnNummer]) {
             Mijn dezeMijn = BepaalMijn(mijnNummer);
             if (dezeMijn.mijnType == "steen") steenopbrengst += ((SteenMijn)dezeMijn).GetOpbrengst(calcDag);
@@ -819,13 +829,20 @@ namespace MijnenRapportage.Models.Overzichten {
             werk6uren += dezeMijn.getWerkUren(calcDag, 6);
             werk10uren += dezeMijn.getWerkUren(calcDag, 10);
             werk22uren += dezeMijn.getWerkUren(calcDag, 22);
+            loon1uren += dezeMijn.getLoonKosten(calcDag, 1);
+            loon1urenmob += dezeMijn.getLoonKosten(calcDag, 101);
+            loon2uren += dezeMijn.getLoonKosten(calcDag, 2);
+            loon2urenmob += dezeMijn.getLoonKosten(calcDag, 102);
+            loon6uren += dezeMijn.getLoonKosten(calcDag, 6);
+            loon10uren += dezeMijn.getLoonKosten(calcDag, 10);
+            loon22uren += dezeMijn.getLoonKosten(calcDag, 22);
           }
         }
         calcDag = calcDag.AddDays(1);
       }
 
-      Decimal loonkosten = (werk1uren * loon1uur) + (werk1urenmob * loon1uurmob) + (werk2uren * loon2uur) + (werk2urenmob * loon2uurmob)
-                         + (werk6uren * loon6uur) + (werk10uren * loon10uur) + (werk22uren * loon22uur);
+      Decimal loonkosten = loon1uren + loon1urenmob + loon2uren + loon2urenmob
+                         + loon6uren + loon10uren + loon22uren;
 
       int steentotaal = steenopbrengst - steenkosten;
       int ijzertotaal = ijzeropbrengst - ijzerkosten;
@@ -835,10 +852,10 @@ namespace MijnenRapportage.Models.Overzichten {
       Decimal opbrengstenWaarde = (steentotaal * steenWaarde) + (ijzertotaal * ijzerWaarde) + (kleitotaal * kleiWaarde) +
                                   goudtotaal;
 
-      otherRapport += "[b][u][size=18]Mijnopbrengst van ";
+      otherRapport += "[b][u][size=18]Mine yields from ";
       otherRapport += requestInfo.BeginDag.ToString("m", provider);
       if (requestInfo.EindDag > requestInfo.BeginDag) {
-        otherRapport += " t/m ";
+        otherRapport += " until ";
         otherRapport += requestInfo.EindDag.ToString("m", provider);
       }
       otherRapport += "[/size][/u][/b]";
@@ -846,54 +863,54 @@ namespace MijnenRapportage.Models.Overzichten {
       otherRapport += Environment.NewLine;
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[b]Opbrengsten[/b]";
+      otherRapport += "[b]Yields[/b]";
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[list] [*]Steen: ";
+      otherRapport += "[list] [*]Stone: ";
       otherRapport += steenopbrengst;
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]IJzer: ";
+      otherRapport += "[*]Iron: ";
       otherRapport += ijzeropbrengst;
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]Goud: fl. ";
+      otherRapport += "[*]Gold: £ ";
       otherRapport += goudopbrengst.ToString("#.00").Replace(".", ",");
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]Klei: ";
+      otherRapport += "[*]Clay: ";
       otherRapport += kleiopbrengst;
       otherRapport += Environment.NewLine;
 
       otherRapport += "[/list]";
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[b]Kosten[/b]";
+      otherRapport += "[b]Costs[/b]";
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[list] [*]Steen: ";
+      otherRapport += "[list] [*]Stone: ";
       otherRapport += steenkosten;
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]IJzer: ";
+      otherRapport += "[*]Iron: ";
       otherRapport += ijzerkosten;
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]Loonkost: fl ";
+      otherRapport += "[*]Wages: £ ";
       otherRapport += loonkosten.ToString("#.00").Replace(".", ",");
       otherRapport += Environment.NewLine;
 
       otherRapport += "[/list]";
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[b]Netto opbrengst = ";
+      otherRapport += "[b]Net gain = ";
       if (opbrengstenWaarde > 0) {
         otherRapport += "[color=green]";
       }
       if (opbrengstenWaarde < 0) {
         otherRapport += "[color=red]";
       }
-      otherRapport += " fl ";
+      otherRapport += " £ ";
       otherRapport += opbrengstenWaarde.ToString("#.00").Replace(".", ",");
       if (opbrengstenWaarde != 0) {
         otherRapport += "[/color]";
@@ -901,7 +918,7 @@ namespace MijnenRapportage.Models.Overzichten {
       otherRapport += "[/b]";
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[list] [*]Steen: ";
+      otherRapport += "[list] [*]Stone: ";
       if (steentotaal > 0) {
         otherRapport += "[color=green]";
       }
@@ -914,7 +931,7 @@ namespace MijnenRapportage.Models.Overzichten {
       }
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]IJzer: ";
+      otherRapport += "[*]Iron: ";
       if (ijzertotaal > 0) {
         otherRapport += "[color=green]";
       }
@@ -927,21 +944,21 @@ namespace MijnenRapportage.Models.Overzichten {
       }
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]Geld: ";
+      otherRapport += "[*]Gold: ";
       if (goudtotaal > 0) {
         otherRapport += "[color=green]";
       }
       if (goudtotaal < 0) {
         otherRapport += "[color=red]";
       }
-      otherRapport += " fl ";
+      otherRapport += " £ ";
       otherRapport += goudtotaal.ToString("#.00").Replace(".", ",");
       if (goudtotaal != 0) {
         otherRapport += "[/color]";
       }
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]Klei: ";
+      otherRapport += "[*]Clay: ";
       if (kleitotaal > 0) {
         otherRapport += "[color=green]";
       }
@@ -955,38 +972,38 @@ namespace MijnenRapportage.Models.Overzichten {
       otherRapport += "[/list]";
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[b]Gewerkte uren[/b]";
+      otherRapport += "[b]Worked hours[/b]";
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[list] [*]1 uur: ";
+      otherRapport += "[list] [*]1 hour: ";
       otherRapport += werk1uren;
       otherRapport += " website";
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]1 uur: ";
+      otherRapport += "[*]1 hour: ";
       otherRapport += werk1urenmob;
       otherRapport += " mobiel";
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]2 uur: ";
+      otherRapport += "[*]2 hour: ";
       otherRapport += werk2uren;
       otherRapport += " website";
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]2 uur: ";
+      otherRapport += "[*]2 hour: ";
       otherRapport += werk2urenmob;
       otherRapport += " mobiel";
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]6 uur: ";
+      otherRapport += "[*]6 hour: ";
       otherRapport += werk6uren;
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]10 uur: ";
+      otherRapport += "[*]10 hour: ";
       otherRapport += werk10uren;
       otherRapport += Environment.NewLine;
 
-      otherRapport += "[*]22 uur: ";
+      otherRapport += "[*]22 hour: ";
       otherRapport += werk22uren;
       otherRapport += Environment.NewLine;
 
@@ -994,45 +1011,38 @@ namespace MijnenRapportage.Models.Overzichten {
 
       otherRapport += Environment.NewLine;
       otherRapport += Environment.NewLine;
-      otherRapport += "[b]Mijnen in dit rapport meegenomen: [/b]";
+      otherRapport += "[b]Mines in this report: [/b]";
       otherRapport += Environment.NewLine;
       if (requestInfo.IncludeMijn[0]) {
-        otherRapport += "- Mijn 1: Goudmijn";
+        otherRapport += "- Mine 1: Gold mine";
         otherRapport += Environment.NewLine;
       }
       if (requestInfo.IncludeMijn[1]) {
-        otherRapport += "- Mijn 2: IJzermijn";
+        otherRapport += "- Mine 2: Iron mine";
         otherRapport += Environment.NewLine;
       }
       if (requestInfo.IncludeMijn[2]) {
-        otherRapport += "- Mijn 3: Goudmijn";
+        otherRapport += "- Mine 3: Clay mine";
         otherRapport += Environment.NewLine;
       }
       if (requestInfo.IncludeMijn[3]) {
-        otherRapport += "- Mijn 4: Steenmijn";
+        otherRapport += "- Mine 4: Stone mine";
         otherRapport += Environment.NewLine;
       }
-      if (requestInfo.IncludeMijn[4]) {
-        otherRapport += "- Mijn 5: Steenmijn";
-        otherRapport += Environment.NewLine;
-      }
-      if (requestInfo.IncludeMijn[5]) {
-        otherRapport += "- Mijn 6: Kleimijn";
-        otherRapport += Environment.NewLine;
-      }
-      otherRapport += Environment.NewLine;
-      otherRapport += "[b]Rekenwaardes in dit rapport: [/b]";
 
       otherRapport += Environment.NewLine;
-      otherRapport += "Steenwaarde: fl ";
+      otherRapport += "[b]Values used in this report: [/b]";
+
+      otherRapport += Environment.NewLine;
+      otherRapport += "Stone value: fl ";
       otherRapport += steenWaarde.ToString("#.00").Replace(".", ",");
 
       otherRapport += Environment.NewLine;
-      otherRapport += "IJzerwaarde: fl ";
+      otherRapport += "Iron value: fl ";
       otherRapport += ijzerWaarde.ToString("#.00").Replace(".", ",");
 
       otherRapport += Environment.NewLine;
-      otherRapport += "Kleiwaarde: fl ";
+      otherRapport += "Clay value: fl ";
       otherRapport += kleiWaarde.ToString("#.00").Replace(".", ",");
 
       otherRapport += Environment.NewLine;
@@ -1099,7 +1109,7 @@ namespace MijnenRapportage.Models.Overzichten {
     }
 
     private int Steenopbrengst(DateTime dag) {
-      return mijn4.GetOpbrengst(dag) + mijn5.GetOpbrengst(dag);
+      return mijn4.GetOpbrengst(dag);
     }
 
     private int Ijzeropbrengst(DateTime dag) {
@@ -1107,65 +1117,98 @@ namespace MijnenRapportage.Models.Overzichten {
     }
 
     private Decimal Goudopbrengst(DateTime dag) {
-      return mijn1.GetOpbrengst(dag) + mijn3.GetOpbrengst(dag);
+      return mijn1.GetOpbrengst(dag);
     }
 
     private int Kleiopbrengst(DateTime dag) {
-      return mijn6.GetOpbrengst(dag);
+      return mijn3.GetOpbrengst(dag);
     }
 
     private int Steenkosten(DateTime dag) {
       return mijn1.GetSteenKosten(dag) + mijn2.GetSteenKosten(dag) + mijn3.GetSteenKosten(dag) +
-             mijn4.GetSteenKosten(dag) + mijn5.GetSteenKosten(dag) + mijn6.GetSteenKosten(dag);
+             mijn4.GetSteenKosten(dag);
     }
 
     private int Ijzerkosten(DateTime dag) {
       return mijn1.GetIjzerKosten(dag) + mijn2.GetIjzerKosten(dag) + mijn3.GetIjzerKosten(dag) +
-             mijn4.GetIjzerKosten(dag) + mijn5.GetIjzerKosten(dag) + mijn6.GetIjzerKosten(dag);
+             mijn4.GetIjzerKosten(dag);
     }
 
     private int Werk1uren(DateTime dag) {
       return mijn1.getWerkUren(dag, 1) + mijn2.getWerkUren(dag, 1) + mijn3.getWerkUren(dag, 1) +
-             mijn4.getWerkUren(dag, 1) + mijn5.getWerkUren(dag, 1) + mijn6.getWerkUren(dag, 1);
+             mijn4.getWerkUren(dag, 1);
     }
 
     private int Werk1urenMob(DateTime dag) {
       return mijn1.getWerkUren(dag, 101) + mijn2.getWerkUren(dag, 101) + mijn3.getWerkUren(dag, 101) +
-             mijn4.getWerkUren(dag, 101) + mijn5.getWerkUren(dag, 101) + mijn6.getWerkUren(dag, 101);
+             mijn4.getWerkUren(dag, 101);
     }
 
     private int Werk2uren(DateTime dag) {
       return mijn1.getWerkUren(dag, 2) + mijn2.getWerkUren(dag, 2) + mijn3.getWerkUren(dag, 2) +
-             mijn4.getWerkUren(dag, 2) + mijn5.getWerkUren(dag, 2) + mijn6.getWerkUren(dag, 2);
+             mijn4.getWerkUren(dag, 2);
     }
 
     private int Werk2urenMob(DateTime dag) {
       return mijn1.getWerkUren(dag, 102) + mijn2.getWerkUren(dag, 102) + mijn3.getWerkUren(dag, 102) +
-             mijn4.getWerkUren(dag, 102) + mijn5.getWerkUren(dag, 102) + mijn6.getWerkUren(dag, 102);
+             mijn4.getWerkUren(dag, 102);
     }
 
     private int Werk6uren(DateTime dag) {
       return mijn1.getWerkUren(dag, 6) + mijn2.getWerkUren(dag, 6) + mijn3.getWerkUren(dag, 6) +
-             mijn4.getWerkUren(dag, 6) + mijn5.getWerkUren(dag, 6) + mijn6.getWerkUren(dag, 6);
+             mijn4.getWerkUren(dag, 6);
     }
 
     private int Werk10uren(DateTime dag) {
       return mijn1.getWerkUren(dag, 10) + mijn2.getWerkUren(dag, 10) + mijn3.getWerkUren(dag, 10) +
-             mijn4.getWerkUren(dag, 10) + mijn5.getWerkUren(dag, 10) + mijn6.getWerkUren(dag, 10);
+             mijn4.getWerkUren(dag, 10);
     }
 
     private int Werk22uren(DateTime dag) {
       return mijn1.getWerkUren(dag, 22) + mijn2.getWerkUren(dag, 22) + mijn3.getWerkUren(dag, 22) +
-             mijn4.getWerkUren(dag, 22) + mijn5.getWerkUren(dag, 22) + mijn6.getWerkUren(dag, 22);
+             mijn4.getWerkUren(dag, 22);
+    }
+
+    private Decimal Loon1uren(DateTime dag) {
+      return mijn1.getLoonKosten(dag, 1) + mijn2.getLoonKosten(dag, 1) + mijn3.getLoonKosten(dag, 1) +
+             mijn4.getLoonKosten(dag, 1);
+    }
+
+    private Decimal Loon1urenMob(DateTime dag) {
+      return mijn1.getLoonKosten(dag, 101) + mijn2.getLoonKosten(dag, 101) + mijn3.getLoonKosten(dag, 101) +
+             mijn4.getLoonKosten(dag, 101);
+    }
+
+    private Decimal Loon2uren(DateTime dag) {
+      return mijn1.getLoonKosten(dag, 2) + mijn2.getLoonKosten(dag, 2) + mijn3.getLoonKosten(dag, 2) +
+             mijn4.getLoonKosten(dag, 2);
+    }
+
+    private Decimal Loon2urenMob(DateTime dag) {
+      return mijn1.getLoonKosten(dag, 102) + mijn2.getLoonKosten(dag, 102) + mijn3.getLoonKosten(dag, 102) +
+             mijn4.getLoonKosten(dag, 102);
+    }
+
+    private Decimal Loon6uren(DateTime dag) {
+      return mijn1.getLoonKosten(dag, 6) + mijn2.getLoonKosten(dag, 6) + mijn3.getLoonKosten(dag, 6) +
+             mijn4.getLoonKosten(dag, 6);
+    }
+
+    private Decimal Loon10uren(DateTime dag) {
+      return mijn1.getLoonKosten(dag, 10) + mijn2.getLoonKosten(dag, 10) + mijn3.getLoonKosten(dag, 10) +
+             mijn4.getLoonKosten(dag, 10);
+    }
+
+    private Decimal Loon22uren(DateTime dag) {
+      return mijn1.getLoonKosten(dag, 22) + mijn2.getLoonKosten(dag, 22) + mijn3.getLoonKosten(dag, 22) +
+             mijn4.getLoonKosten(dag, 22);
     }
 
     private Mijn BepaalMijn(int mijnNummer) {
       if (mijnNummer == 0) return mijn1;
       if (mijnNummer == 1) return mijn2;
       if (mijnNummer == 2) return mijn3;
-      if (mijnNummer == 3) return mijn4;
-      if (mijnNummer == 4) return mijn5;
-      return mijn6;
+      return mijn4;
     }
   }
 }

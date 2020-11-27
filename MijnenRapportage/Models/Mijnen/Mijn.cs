@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MijnenRapportage.Models.Mijnen {
@@ -22,6 +19,13 @@ namespace MijnenRapportage.Models.Mijnen {
     private SortedList<DateTime, int> ijzerKosten = new SortedList<DateTime, int>();
 
     public String mijnType;
+    public Decimal loon1uur;
+    public Decimal loon1uurmob;
+    public Decimal loon2uur;
+    public Decimal loon2uurmob;
+    public Decimal loon6uur;
+    public Decimal loon10uur;
+    public Decimal loon22uur;
     #endregion
 
     #region Properties
@@ -259,6 +263,40 @@ namespace MijnenRapportage.Models.Mijnen {
           kosten = 0;
           break;
       }
+      return kosten;
+    }
+
+    public Decimal getLoonKosten(DateTime werkDag, int soort) {
+      Decimal kosten = 0;
+      Decimal loon = 0;
+      int uren = getWerkUren(werkDag, soort);
+      switch (soort) {
+        case 1:
+          loon = loon1uur;
+          break;
+        case 101:
+          loon = loon1uurmob;
+          break;
+        case 2:
+          loon = loon2uur;
+          break;
+        case 102:
+          loon = loon2uurmob;
+          break;
+        case 6:
+          loon = loon6uur;
+          break;
+        case 10:
+          loon = loon10uur;
+          break;
+        case 22:
+          loon = loon22uur;
+          break;
+        default:
+          loon = 0;
+          break;
+      }
+      kosten = loon * uren;
       return kosten;
     }
 

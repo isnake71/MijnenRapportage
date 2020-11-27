@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="Mijn rapportage" Height="810" Width="1005">
     <Grid>
-        <TextBox x:Name="MijnData" HorizontalAlignment="Left" Height="750" Margin="10,10,0,0" TextWrapping="Wrap" Text="Plak hier de inhoud van het mijnen beheerscherm" VerticalAlignment="Top" Width="450" AcceptsReturn="True" AcceptsTab="True"/>
+        <TextBox x:Name="MijnData" HorizontalAlignment="Left" Height="750" Margin="10,10,0,0" TextWrapping="Wrap" Text="Paste mine values here" VerticalAlignment="Top" Width="450" AcceptsReturn="True" AcceptsTab="True"/>
         <DatePicker x:Name="RapportDatum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="480,60,0,0" Width="150"/>
-        <Button x:Name="Inlezen" HorizontalAlignment="Left" Height="30" Margin="480,10,0,0" VerticalAlignment="Top" Width="150" Content="Inlezen" Click="Inlezen_Click" />
-        <TextBox x:Name="Dagrapport" HorizontalAlignment="Left" Height="660" Margin="480,100,0,0" TextWrapping="Wrap" Text="Hier komt het rapport" VerticalAlignment="Top" Width="500"/>
-        <Button x:Name="Genereren" Content="DagRapport" HorizontalAlignment="Left" Height="25" Margin="640,60,0,0" VerticalAlignment="Top" Width="110" Click="Genereren_Click"/>
-        <Button x:Name="WeekRapport" Content="WeekRapport" HorizontalAlignment="Left" Height="25" Margin="760,60,0,0" VerticalAlignment="Top" Width="110" Click="Weekrapport_Click"/>
-        <Button x:Name="OverigeRappporten" Content="Overige" HorizontalAlignment="Left" Height="25" Margin="880,60,0,0" VerticalAlignment="Top" Width="100" Click="OverigeRapporten_Click"/>
+        <Button x:Name="Inlezen" HorizontalAlignment="Left" Height="30" Margin="480,10,0,0" VerticalAlignment="Top" Width="150" Content="Read" Click="Inlezen_Click" />
+        <TextBox x:Name="Dagrapport" HorizontalAlignment="Left" Height="660" Margin="480,100,0,0" TextWrapping="Wrap" Text="Report will appear here" VerticalAlignment="Top" Width="500"/>
+        <Button x:Name="Genereren" Content="DayReport" HorizontalAlignment="Left" Height="25" Margin="640,60,0,0" VerticalAlignment="Top" Width="110" Click="Genereren_Click"/>
+        <Button x:Name="WeekRapport" Content="WeekReport" HorizontalAlignment="Left" Height="25" Margin="760,60,0,0" VerticalAlignment="Top" Width="110" Click="Weekrapport_Click"/>
+        <Button x:Name="OverigeRappporten" Content="Other" HorizontalAlignment="Left" Height="25" Margin="880,60,0,0" VerticalAlignment="Top" Width="100" Click="OverigeRapporten_Click"/>
         <Label x:Name="Foutmelding" Content="" HorizontalAlignment="Left" Height="35" Margin="650,10,0,0" VerticalAlignment="Top" Width="330" Foreground="#FFFB0404" FontWeight="Bold" FontSize="16"/>
         <Button x:Name="Config" Content="..." HorizontalAlignment="Left" Margin="959,0,0,748" VerticalAlignment="Bottom" Width="19" Click="Config_Click"/>
     </Grid>

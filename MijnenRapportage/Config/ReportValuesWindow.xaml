@@ -5,31 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MijnenRapportage.Config"
         mc:Ignorable="d"
-        Title="ReportValuesWindow" Height="357" Width="260">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Label x:Name="label" Content="IJzerwaarde" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="Steenwaarde" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label2" Content="Kleiwaarde" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label3" Content="Loon 1 uur" HorizontalAlignment="Left" Margin="10,99,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label1mob" Content="1 uur mobiel" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label4" Content="Loon 2 uur" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label2mob" Content="2 uur mobiel" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label5" Content="Loon 6 uur" HorizontalAlignment="Left" Margin="10,203,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label6" Content="Loon 10 uur" HorizontalAlignment="Left" Margin="10,229,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label7" Content="Loon 22 uur" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="ijzerWaarde" HorizontalAlignment="Left" Height="23" Margin="110,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="steenWaarde" HorizontalAlignment="Left" Height="23" Margin="110,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="kleiWaarde" HorizontalAlignment="Left" Height="23" Margin="110,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="loon1uur" HorizontalAlignment="Left" Height="23" Margin="110,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="loon1uurmob" HorizontalAlignment="Left" Height="23" Margin="110,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="loon2uur" HorizontalAlignment="Left" Height="23" Margin="110,151,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="loon2uurmob" HorizontalAlignment="Left" Height="23" Margin="110,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="loon6uur" HorizontalAlignment="Left" Height="23" Margin="110,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="loon10uur" HorizontalAlignment="Left" Height="23" Margin="110,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="loon22uur" HorizontalAlignment="Left" Height="23" Margin="110,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="opslaan" Content="Opslaan" HorizontalAlignment="Left" Margin="10,287,0,0" VerticalAlignment="Top" Width="220" Height="25" Click="opslaan_Click"/>
-    </Grid>
+        Title="ReportValuesWindow" Height="263.557" Width="900.923">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="10*"/>
+      <ColumnDefinition Width="179*"/>
+    </Grid.ColumnDefinitions>
+    <Label x:Name="label" Content="Iron value" HorizontalAlignment="Left" Margin="610,34,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+    <Label x:Name="label1" Content="Stone value" HorizontalAlignment="Left" Margin="610,60,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+    <Label x:Name="label2" Content="Clay value" HorizontalAlignment="Left" Margin="610,86,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+    <Label x:Name="label3" Content="Wage 1 hour" HorizontalAlignment="Left" Margin="16,34,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+    <Label x:Name="label1mob" Content="1 hour mobile" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+    <Label x:Name="label4" Content="Wage 2 hour" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+    <Label x:Name="label2mob" Content="2 hour mobile" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+    <Label x:Name="label5" Content="Wage 6 hour" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+    <Label x:Name="label6" Content="Wage 10 hour" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+    <Label x:Name="label7" Content="wage 22 hour" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+    <TextBox x:Name="ijzerWaarde" HorizontalAlignment="Left" Height="23" Margin="710,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="steenWaarde" HorizontalAlignment="Left" Height="23" Margin="710,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="kleiWaarde" HorizontalAlignment="Left" Height="23" Margin="710,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="gloon1uur" HorizontalAlignment="Left" Height="23" Margin="69.674,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="gloon1uurmob" HorizontalAlignment="Left" Height="23" Margin="69.674,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="gloon2uur" HorizontalAlignment="Left" Height="23" Margin="69.674,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="gloon2uurmob" HorizontalAlignment="Left" Height="23" Margin="69.674,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="gloon6uur" HorizontalAlignment="Left" Height="23" Margin="69.674,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="gloon10uur" HorizontalAlignment="Left" Height="23" Margin="69.674,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="gloon22uur" HorizontalAlignment="Left" Height="23" Margin="69.674,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <Button x:Name="opslaan" Content="Opslaan" HorizontalAlignment="Left" Margin="610,188,0,0" VerticalAlignment="Top" Width="220" Height="25" Click="opslaan_Click" Grid.Column="1" RenderTransformOrigin="0.973,0.648"/>
+    <TextBox x:Name="iloon1uur" HorizontalAlignment="Left" Height="23" Margin="198.674,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="iloon1uurmob" HorizontalAlignment="Left" Height="23" Margin="198.674,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="iloon2uur" HorizontalAlignment="Left" Height="23" Margin="198.674,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="iloon2uurmob" HorizontalAlignment="Left" Height="23" Margin="198.674,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="iloon6uur" HorizontalAlignment="Left" Height="23" Margin="198.674,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="iloon10uur" HorizontalAlignment="Left" Height="23" Margin="198.674,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="iloon22uur" HorizontalAlignment="Left" Height="23" Margin="198.674,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="cloon1uur" HorizontalAlignment="Left" Height="23" Margin="327,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="cloon1uurmob" HorizontalAlignment="Left" Height="23" Margin="327,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="cloon2uur" HorizontalAlignment="Left" Height="23" Margin="327,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="cloon2uurmob" HorizontalAlignment="Left" Height="23" Margin="327,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="cloon6uur" HorizontalAlignment="Left" Height="23" Margin="327,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="cloon10uur" HorizontalAlignment="Left" Height="23" Margin="327,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="cloon22uur" HorizontalAlignment="Left" Height="23" Margin="327,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="sloon1uur" HorizontalAlignment="Left" Height="23" Margin="457,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="sloon1uurmob" HorizontalAlignment="Left" Height="23" Margin="457,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="sloon2uur" HorizontalAlignment="Left" Height="23" Margin="457,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="sloon2uurmob" HorizontalAlignment="Left" Height="23" Margin="457,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="sloon6uur" HorizontalAlignment="Left" Height="23" Margin="457,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="sloon10uur" HorizontalAlignment="Left" Height="23" Margin="457,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <TextBox x:Name="sloon22uur" HorizontalAlignment="Left" Height="23" Margin="457,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+    <Label x:Name="label3_Copy" Content="Gold mine" HorizontalAlignment="Left" Margin="70,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+    <Label x:Name="label3_Copy1" Content="Iron mine" HorizontalAlignment="Left" Margin="199,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+    <Label x:Name="label3_Copy2" Content="Clay mine" HorizontalAlignment="Left" Margin="327,11,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+    <Label x:Name="label3_Copy3" Content="Stone quary" HorizontalAlignment="Left" Margin="457,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+  </Grid>
 </Window>

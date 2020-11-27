@@ -7,17 +7,15 @@
         mc:Ignorable="d"
         Title="Andere Rapporten" Height="810" Width="530">
     <Grid>
-        <TextBox x:Name="Dagrapport" HorizontalAlignment="Left" Height="660" Margin="10,100,0,0" TextWrapping="Wrap" Text="Hier komt het rapport" VerticalAlignment="Top" Width="500"/>
+        <TextBox x:Name="Dagrapport" HorizontalAlignment="Left" Height="660" Margin="10,100,0,0" TextWrapping="Wrap" Text="Report will appear here" VerticalAlignment="Top" Width="500"/>
         <DatePicker x:Name="RapportDatum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,65,0,0" Width="150"/>
-        <DatePicker x:Name="RapportEindDatum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,65,0,0" Width="150"/>
-        <Button x:Name="Genereren" Content="Genereer" HorizontalAlignment="Left" Height="25" Margin="400,65,0,0" VerticalAlignment="Top" Width="110" Click="Genereren_Click"/>
-        <Button x:Name="Csv" Content="CSV" HorizontalAlignment="Left" Height="20" Margin="460,40,0,0" VerticalAlignment="Top" Width="50" Click="Genereren_Csv"/>
-        <Label x:Name="Label1" Content="t/m" HorizontalAlignment="Left" Height="24" Margin="165,65,0,0" VerticalAlignment="Top" Width="30"/>
-        <CheckBox x:Name="Mijn1" Content="Mijn1: Goudmijn" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Mijn2" Content="Mijn2: IJzermijn" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Mijn3" Content="Mijn3: Goudmijn" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Mijn4" Content="Mijn4: Steenmijn" HorizontalAlignment="Left" Margin="200,10,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Mijn5" Content="Mijn5: Steenmijn" HorizontalAlignment="Left" Margin="200,25,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Mijn6" Content="Mijn6: Kleimijn" HorizontalAlignment="Left" Margin="200,40,0,0" VerticalAlignment="Top"/>
-    </Grid>
+        <DatePicker x:Name="RapportEindDatum" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="203,65,0,0" Width="150"/>
+        <Button x:Name="Generate" Content="Generate" HorizontalAlignment="Left" Height="25" Margin="400,65,0,0" VerticalAlignment="Top" Width="110" Click="Genereren_Click"/>
+        <Button x:Name="Csv" Content="CSV" HorizontalAlignment="Left" Height="20" Margin="460,40,0,0" VerticalAlignment="Top" Width="50" Click="Genereren_Csv" Visibility="Hidden"/>
+        <Label x:Name="Label1" Content="until" HorizontalAlignment="Left" Height="24" Margin="165,65,0,0" VerticalAlignment="Top" Width="33"/>
+        <CheckBox x:Name="Mijn1" Content="Mine1: Gold mine" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Mijn2" Content="Mine2: Iron mine" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Mijn3" Content="Mine3: Clay mine" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Mijn4" Content="Mine4: Stone mine" HorizontalAlignment="Left" Margin="203,10,0,0" VerticalAlignment="Top"/>
+  </Grid>
 </Window>
